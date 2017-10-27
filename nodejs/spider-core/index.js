@@ -16,7 +16,7 @@ class Spider {
                 'Cookie': 'CXID=9DA60F96D5FDF58B31E48C5FD70068E6; SUID=024F990E4B238B0A595F581000047A90; SUV=00B501F00E994D2A598299CE731E6603; ad=Plllllllll2BHuZolllllVXZnw7lllllRIOGUkllll9lllllpylll5@@@@@@@@@@; ABTEST=7|1508151994|v1; SNUID=F2B660F7F9FCA6CB84D8BBEEFAD60245; IPLOC=CN4403; JSESSIONID=aaaDwxbeodgVFffEOcv8v; weixinIndexVisited=1; sct=126; ld=byllllllll2BiQLFlllllVXHI67lllllRIO5Byllll9lllllVZlll5@@@@@@@@@@; LSTMV=254%2C71; LCLKINT=1634; PHPSESSID=4doetqme5nhq1to25sep03qgu4; SUIR=F2B660F7F9FCA6CB84D8BBEEFAD60245; successCount=3|Wed, 25 Oct 2017 11:43:00 GMT; seccodeRight=success; refresh=1'
             },
             transform: function (body, response) {
-                console.log('-------------> body', body);
+                // console.log('-------------> body', body);
                 if (body.indexOf('您的访问过于频繁') > -1) throw new Error('您的访问过于频繁');
                 if(response.statusCode !== 200) throw new Error(response.statusCode);
                 return cheerio.load(body, { decodeEntities: false });
@@ -92,7 +92,6 @@ function parseTextFilter(text, rule){
     if (rule.match && text) text = text.match(eval(rule.match))[0];
     if (rule.replace && text) text = text.replace(eval(rule.replace),'');
     if (rule.exec && text){
-        console.log('-------------> text', text);
         if (eval(rule.exec).test(text)){
             text = eval(rule.exec).exec(text)[1];
         } else {

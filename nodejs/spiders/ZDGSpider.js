@@ -1,4 +1,4 @@
-const Spider  = require('./BaseSpider');
+const Spider  = require('../BaseSpider');
 const rules   = require('../rules/ZDG');
 const cheerio = require('cheerio');
 const rp      = require('request-promise');

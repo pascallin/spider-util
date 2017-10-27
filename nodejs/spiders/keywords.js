@@ -1,6 +1,4 @@
-const Spider  = require('./BaseSpider');
 const rules   = require('../rules/keywords');
-const db      = require('../db');
 
 class NewSpider extends Spider{
     

@@ -1,6 +1,6 @@
 const cheerio = require('cheerio');
 const rp      = require('request-promise');
-const Spider  = require('./BaseSpider');
+const Spider  = require('../BaseSpider');
 const rules   = require('../rules/WPG');
 
 class NewSpider extends Spider{
