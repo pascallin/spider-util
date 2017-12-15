@@ -4,17 +4,20 @@ const _           = require('lodash');
 const RulesParser = require('./RulesParser')
 
 class Spider {
-    constructor(name){
-        this.name = name;
+    constructor ({ name, url}) {
+        this.name = name
+        this.url = url
+        this.opt = {
+            headers: {}
+        }
     }
-
-    *loadPage(url, opt){
+    * loadPage (url) {
         var options = {
             uri: url,
             simple: false,
             headers: _.merge({
                 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:57.0) Gecko/20100101 Firefox/57.0',
-            }, opt.headers),
+            }, this.opt.headers),
             transform: function (body, response) {
                 if(response.statusCode !== 200) throw new Error(response.statusCode);
                 return cheerio.load(body, { decodeEntities: false });
@@ -24,8 +27,7 @@ class Spider {
         if (!$) return null;
         return $;
     }
-
-    *grab(url, rules){
+    * grab (url, rules) {
         let $ = yield this.loadPage(url);
         if (!$) return null;
         let data = {};
@@ -47,4 +49,14 @@ class Spider {
         }
         return data;
     }
+    * htmlParse (url) {
+        const rules = require(`../rules/${this.name}`);
+        let uri = this.url || url || "";
+        let data = yield this.grab(uri, rules);
+        data.source = uri;
+        let res = yield db.get(this.name).insert(data);
+        return res;
+    }
 }
+
+module.exports = Spider

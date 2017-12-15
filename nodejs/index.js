@@ -1,11 +1,13 @@
-require('./core/init');
-const Spider = require('./spiders/keywords');
+require('./core/process');
+const Spider = require('./spiders/eastmoney');
 const co = require('co');
 
 let spider = new Spider();
 co(function*(){
+    console.info('app start')
+    let s = Date.now()
     let r = yield spider.parse();
-    console.log('-------------> r', r);
+    console.info('finished, used time: ', Date.now() - s);
     exitApp();
 }).catch((e) => {
     console.error(e.stack);
