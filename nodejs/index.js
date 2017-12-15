@@ -1,4 +1,4 @@
-require('./core/Process');
+require('./core/process');
 const Spider = require('./spiders/eastmoney');
 const co = require('co');
 
