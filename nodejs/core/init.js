@@ -1,5 +1,5 @@
 global.Spider  = require('./Spider');
-global.db = require('./MGClient');
+global.db = require('./mongodb');
 
 global.exitApp = function(){
     db.close();
