@@ -1,4 +1,4 @@
-require('./init');
+require('./core/init');
 const Spider = require('./spiders/keywords');
 const co = require('co');
 
