@@ -12,6 +12,13 @@ module.exports = {
         if (rule.type === 'list'){
             result = [];
             elem.each(function(i, el){
+                if (rule.list) {
+                    let temp = {}
+                    for (let j in rule.list) {
+                        temp[j] = parseAction($(this), rule.list[j])
+                    }
+                    return result.push(temp);
+                }
                 let temp = parseAction($(this), rule)
                 result.push(temp);
             });
